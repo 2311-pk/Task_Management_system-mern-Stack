@@ -12,18 +12,15 @@ const allowedOrigins = [
   
 require("dotenv").config();
 const app=express();
-app.use(
-    cors({
-      origin: function (origin, callback) {
-        if (allowedOrigins.includes(origin) || !origin) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      },
-      credentials: true // Allow cookies if needed
-    })
-  );
+app.use(cors({
+    origin: [
+      "http://localhost:5173",  // Local frontend
+      "https://task-management-system-mern-stack.vercel.app" // Deployed frontend
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],  // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"],  // Allowed headers
+    credentials: true // Allow cookies if needed
+  }));
 app.use(express.json());
 app.use("/api/TaskRoutes",T);
 mongoose.connect(process.env.MONGO_URI)

@@ -10,7 +10,7 @@ const handle = async (e) => {
   e.preventDefault(); // Prevent page refresh
 
   try {
-    const response = await fetch(`${BASE_URL}/TaskRoutes/login`, {
+    const response = await fetch(`${BASE_URL}/api/TaskRoutes/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const handle = async (e) => {
 
     if (response.ok) {
       alert("Login successful");
-      navigate("/dashboard",{state:{username}});
+      navigate("/dashboard",{ state:{username}});
     } else {
       const errorData = await response.json();
       alert(errorData.message || "Invalid credentials");

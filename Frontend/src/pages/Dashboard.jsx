@@ -9,7 +9,7 @@ function Dashboard()
 
   const fetchData = async()=>{
     try{
-        const response = await fetch (`${BASE_URL}/TaskRoutes/info`,{
+        const response = await fetch (`${BASE_URL}/api/TaskRoutes/info`,{
             method:"POST",
            headers: {
               "Content-Type":"application/json",

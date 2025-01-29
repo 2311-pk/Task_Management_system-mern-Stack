@@ -67,7 +67,7 @@ function Dashboard()
     {task.map((t)=>
   <tr className="border-2 w-full text-center border-blue-300"
 key={t._id}>
-    <td className="border-2 border-cyan-300 p-3">{t.taskname}</td>
+    <td className="border-2 border-cyan-300 p-3">{t.name}</td>
     <td className="border-2 border-cyan-300 p-3">{t.description}</td>
     <td className="border-2 border-cyan-300">{t.dueDate}</td>
     <td className="border-2 border-cyan-300">{t.status}</td>

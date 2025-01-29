@@ -7,7 +7,7 @@ const T =require("./Routes/TaskRoutes");
 const { default: mongoose } = require("mongoose");
 const allowedOrigins = [
     'http://localhost:5173', // Local development
-    'https://task-management-system-mern-stack-w9va.vercel.app/' // Deployed frontend
+    'https://task-management-system-mern-stack-w9va.vercel.app' // Deployed frontend
   ];
   
 require("dotenv").config();

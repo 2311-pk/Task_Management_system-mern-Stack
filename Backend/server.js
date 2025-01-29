@@ -17,6 +17,7 @@ app.use(cors({
     allowedHeaders: ["Content-Type", "Authorization"],  // Allowed headers
     credentials: true // Allow cookies if needed
   }));
+  app.options("*", cors());
 app.use(express.json());
 app.use("/api/TaskRoutes",T);
 mongoose.connect(process.env.MONGO_URI)

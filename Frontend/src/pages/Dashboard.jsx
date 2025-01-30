@@ -56,9 +56,9 @@ function Dashboard()
 
 
 </div>
-<div className="bg-white mt-8 rounded-4xl border-4 border-white  shadow-2xl   shadow-white">
+<div className="bg-white mt-8 m-10  rounded-4xl border-4 border-white  shadow-2xl   shadow-white">
     
-<div className="overflow-x-auto rounded-4xl p-2 bg-indigo-300">
+<div className="overflow-x-auto rounded-4xl p-2 bg-indigo-300 ">
   <table className="text-wrap w-full rounded-4xl">
     <thead>
       <tr className=" p-3">

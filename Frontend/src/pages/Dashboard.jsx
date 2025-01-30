@@ -56,12 +56,12 @@ function Dashboard()
 
 
 </div>
-<div className="bg-white mt-8 m-10  rounded-4xl border-4 border-white  shadow-2xl   shadow-white">
+<div className="bg-white mt-8 m-10 lg:m-6 rounded-4xl border-4 border-white  shadow-2xl   shadow-white">
     
-<div className="overflow-x-auto rounded-4xl p-2 bg-indigo-300 ">
+<div className="overflow-x-auto rounded-4xl p-2  ">
   <table className="text-wrap w-full rounded-4xl">
     <thead>
-      <tr className=" p-3">
+      <tr className="p-3 text-black border-2 border-white border-b-blue-300 ">
         <th>Task Name</th>
         <th>Description</th>
         <th>Due Date</th>
@@ -70,11 +70,11 @@ function Dashboard()
     </thead>
     <tbody>
       {task.map((t) => (
-        <tr className="border-2 w-full text-center border-blue-300" key={t._id}>
+        <tr className=" hover:bg-blue-300 w-full text-center border-2 border-white border-b-blue-300 font-light " key={t._id}>
           <td className=" p-3">{t.name}</td>
-          <td className=" p-3">{t.description}</td>
-          <td className=" p-3">{t.dueDate}</td>
-          <td className=" p-3">{t.status}</td>
+          <td className="p-3">{t.description}</td>
+          <td className="p-3">{t.dueDate}</td>
+          <td className="p-3">{t.status}</td>
         </tr>
       ))}
     </tbody>

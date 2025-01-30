@@ -58,25 +58,28 @@ function Dashboard()
 </div>
 <div>
     
-<table className="text-wrap  w-full mt-5">
-  <thead ><tr className="border-2 border-cyan-300 p-3">
-<th>taskname</th>
-<th>description</th>
-<th>dueDate</th>
-<th>status</th></tr>
-  </thead>
-  <tbody>
-    {task.map((t)=>
-  <tr className="border-2 w-full text-center border-blue-300"
-key={t._id}>
-    <td className="border-2 border-cyan-300 p-3">{t.name}</td>
-    <td className="border-2 border-cyan-300 p-3">{t.description}</td>
-    <td className="border-2 border-cyan-300">{t.dueDate}</td>
-    <td className="border-2 border-cyan-300">{t.status}</td>
-    </tr>
-)}
-  </tbody>
-</table>
+<div className="overflow-x-auto">
+  <table className="text-wrap w-full mt-5">
+    <thead>
+      <tr className="border-2 border-cyan-300 p-3">
+        <th>Task Name</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {task.map((t) => (
+        <tr className="border-2 w-full text-center border-blue-300" key={t._id}>
+          <td className="border-2 border-cyan-300 p-3">{t.name}</td>
+          <td className="border-2 border-cyan-300 p-3">{t.description}</td>
+          <td className="border-2 border-cyan-300 p-3">{t.dueDate}</td>
+          <td className="border-2 border-cyan-300 p-3">{t.status}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
 </div></div>
 </div>

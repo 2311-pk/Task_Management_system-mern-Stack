@@ -1,8 +1,31 @@
 import react, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from "../config";
-function Dashboard()
-{
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+
+// Register required components
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+
+const Dashboard = () => {
+  const data = {
+    labels: ["Pending", "In-Progress", "Completed"],
+    datasets: [
+      {
+        label: "Tasks",
+        data: [10, 5, 15], // Replace with actual counts
+        backgroundColor: ["#FF6384", "#FFCD56", "#36A2EB"],
+      },
+    ],
+  };
     const location =useLocation();
     const username = location.state.username;
     const [task,setTasks]=useState([]);
@@ -37,7 +60,7 @@ function Dashboard()
   },[]);
 
     return(<>
-    <div className="w-screen h-screen bg-gradient-to-br from-gray-900 to-gray-700">
+    <div className="w-screen min-h-screen bg-gradient-to-br from-gray-900 to-gray-700">
     <div
  className="w-full max-w-screen-xl mx-auto ">
 <h1>Dashboard page</h1>
@@ -56,26 +79,32 @@ function Dashboard()
 
 
 </div>
-<div className="bg-white mt-8 m-10 lg:m-6 rounded-4xl border-4 border-white  shadow-2xl   shadow-white">
-    
+<div className="bg-white p-6 w-1/2 mt-6 ml-10 h-96  rounded-4xl  border-4 border-blue-400   shadow-2xl   shadow-white">
+      <h2 className="text-2xl font-bold mb-4 " >Task Overview</h2>
+      <Bar data={data}  className="pb-10" width={1800} height={1000}/>
+    </div>
+    <div className="bg-white mt-8 m-10 lg:m-6 rounded-4xl border-4 border-blue-400   shadow-2xl   shadow-white">
+   
 <div className="overflow-x-auto rounded-4xl p-2  ">
-  <table className="text-wrap w-full rounded-4xl">
-    <thead>
-      <tr className="p-3 text-black border-2 border-white border-b-blue-300 ">
-        <th>Task Name</th>
-        <th>Description</th>
-        <th>Due Date</th>
-        <th>Status</th>
-      </tr>
-    </thead>
+<table className="w-full border-collapse rounded-lg shadow-lg bg-white text-gray-900">
+<thead>
+    <tr className="bg-blue-600 text-white uppercase text-sm leading-normal">
+      <th className="py-3 px-6 text-left">Task Name</th>
+      <th className="py-3 px-6 text-left">Description</th>
+      <th className="py-3 px-6 text-center">Due Date</th>
+      <th className="py-3 px-6 text-center">Status</th>
+    </tr>
+  </thead>
     <tbody>
-      {task.map((t) => (
-        <tr className=" hover:bg-blue-300 w-full text-center border-2 border-white border-b-blue-300 font-light " key={t._id}>
-          <td className=" p-3">{t.name}</td>
-          <td className="p-3">{t.description}</td>
-          <td className="p-3">{t.dueDate}</td>
-          <td className="p-3">{t.status}</td>
-        </tr>
+        {task.map((task, index) => (
+          <tr key={task.id} className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"} hover:bg-blue-100`}>
+            <td className="py-3 px-6">{task.name}</td>
+            <td className="py-3 px-6">{task.description}</td>
+            <td className="py-3 px-6 text-center">{new Date(task.dueDate).toLocaleDateString()}</td>
+            <td className={`py-3 px-6 text-center ${task.status === "pending" ? "text-red-500" : "text-green-500"}`}>
+              {task.status}
+            </td>
+          </tr>
       ))}
     </tbody>
   </table>

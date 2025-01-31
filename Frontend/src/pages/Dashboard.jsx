@@ -9,7 +9,9 @@ import {
   LinearScale,
   Tooltip,
   Legend,
-} from "chart.js";
+} from "chart.js/auto";
+import { Line } from 'react-chartjs-2';
+
 
 // Register required components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);

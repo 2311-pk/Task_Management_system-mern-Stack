@@ -1,17 +1,18 @@
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
 
 // Register components for Chart.js
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 function Chart() {
   const data = {
-    labels: ["Pending", "In-Progress", "Completed"],
+    labels: ['Pending', 'In-Progress', 'Completed'],
     datasets: [
       {
-        label: "Tasks",
+        label: 'Tasks',
         data: [10, 5, 15], // Replace with actual counts
-        backgroundColor: ["#FF6384", "#FFCD56", "#36A2EB"],
+        backgroundColor: ['#FF6384', '#FFCD56', '#36A2EB'],
       },
     ],
   };

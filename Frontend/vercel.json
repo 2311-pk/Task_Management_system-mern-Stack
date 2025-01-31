@@ -1,9 +1,4 @@
 {
-    "functions": {
-      "api/TaskRoutes/**/*.js": {
-        "maxDuration": 30
-      }
-    },
     "builds": [
       {
         "src": "api/**/*",

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from "../config";
-import Chart from "./Chart";
 const Dashboard = () => {
   
 
@@ -57,7 +56,6 @@ const Dashboard = () => {
       </div>
 
       {/* Chart Section */}
-     <Chart/>     
 
       {/* Task Table */}
       <div className="bg-white mt-6 p-4 rounded-xl border-4 border-blue-400 shadow-lg w-full sm:w-11/12 md:w-5/6 mx-auto">

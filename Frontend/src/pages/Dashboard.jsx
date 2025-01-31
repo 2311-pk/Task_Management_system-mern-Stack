@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from "../config";
 import { Bar } from "react-chartjs-2";
@@ -10,7 +10,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-
 
 // Register required components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -26,94 +25,121 @@ const Dashboard = () => {
       },
     ],
   };
-    const location =useLocation();
-    const username = location.state.username;
-    const [task,setTasks]=useState([]);
 
-  const fetchData = async()=>{
-    try{
-        const response = await fetch (`${BASE_URL}/api/TaskRoutes/info`,{
-            method:"POST",
-           headers: {
-              "Content-Type":"application/json",
-           },
-           body:JSON.stringify({username}),
-        })
-        if(response.ok)
-        { const data=await response.json();
-          console.log(data);
-          if(Array.isArray(data)){
-            setTasks(data);
-          }
-          else{
-            setTasks([]);
-          }
-        } else{
-            console.log("response is not okay");
-        }
-    } catch(error){
-           console.log(error);
+  const location = useLocation();
+  const username = location.state?.username || "User";
+  const [task, setTasks] = useState([]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/api/TaskRoutes/info`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setTasks(Array.isArray(data) ? data : []);
+      } else {
+        console.log("Response not okay");
+      }
+    } catch (error) {
+      console.log(error);
     }
-  }
-  useEffect(()=>{
- fetchData();
-  },[]);
+  };
 
-    return(<>
-    <div className="w-screen min-h-screen bg-gradient-to-br from-gray-900 to-gray-700">
-    <div
- className="w-full max-w-screen-xl mx-auto ">
-<h1>Dashboard page</h1>
-<h1>username :{username}</h1>
-<div className="flex flex-wrap gap-4 justify-center sm:justify-between mx-8">
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-<div className="shadow-2xl shadow-white w-36 border-4 border-white p-3 lg:w-64  rounded-4xl bg-purple-200">
-<h1 className="mx-auto w-32 text-xl font-semibold text-black">Total Task</h1>
-</div>
-<div className=" shadow-2xl shadow-white w-40 border-4 border-white p-3 lg:w-64  rounded-4xl bg-purple-200">
-<h1 className="mx-auto w-32 text-xl font-semibold text-black">Pending Task</h1>
-</div>
-<div className="shadow-2xl shadow-white  w-56 border-4 border-white pt-3 pb-3 lg:w-64  rounded-4xl bg-purple-200">
-<h1 className="mx-auto w-40 text-xl font-semibold text-black">Completed Task</h1>
-</div>
+  return (
+    <div className="w-screen min-h-screen bg-gradient-to-br from-gray-900 to-gray-700 text-white">
+      {/* Header */}
+      <div className="text-center py-4">
+        <h1 className="text-2xl md:text-3xl font-bold">Dashboard</h1>
+        <h2 className="text-lg md:text-xl mt-1">Welcome, {username}</h2>
+      </div>
 
+      {/* Task Overview Cards */}
+      <div className="flex flex-wrap justify-center gap-4 px-4 md:px-8">
+        {["Total Task", "Pending Task", "Completed Task"].map((title, idx) => (
+          <div
+            key={idx}
+            className="shadow-lg w-full sm:w-52 md:w-64 lg:w-72 p-4 border-2 border-white rounded-xl bg-purple-300 text-center"
+          >
+            <h1 className="text-lg md:text-xl font-semibold text-black">
+              {title}
+            </h1>
+          </div>
+        ))}
+      </div>
 
-</div>
-<div className="bg-white p-6 w-1/2 mt-6 ml-10 h-96  rounded-4xl  border-4 border-blue-400   shadow-2xl   shadow-white">
-      <h2 className="text-2xl font-bold mb-4 " >Task Overview</h2>
-      <Bar data={data}  className="pb-10" width={1800} height={1000}/>
+      {/* Chart Section */}
+      <div className="bg-white mt-6 p-4 rounded-xl border-4 border-blue-400 shadow-lg w-full sm:w-11/12 md:w-2/3 lg:w-1/2 mx-auto">
+        <h2 className="text-xl md:text-2xl font-bold text-black text-center mb-4">
+          Task Overview
+        </h2>
+        <div className="w-full overflow-x-auto">
+          <Bar data={data} />
+        </div>
+      </div>
+
+      {/* Task Table */}
+      <div className="bg-white mt-6 p-4 rounded-xl border-4 border-blue-400 shadow-lg w-full sm:w-11/12 md:w-5/6 mx-auto">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse rounded-lg shadow-md bg-white text-gray-900">
+            <thead>
+              <tr className="bg-blue-600 text-white uppercase text-sm md:text-base">
+                <th className="py-3 px-4 text-left">Task Name</th>
+                <th className="py-3 px-4 text-left">Description</th>
+                <th className="py-3 px-4 text-center">Due Date</th>
+                <th className="py-3 px-4 text-center">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {task.length > 0 ? (
+                task.map((task, index) => (
+                  <tr
+                    key={task.id}
+                    className={`${
+                      index % 2 === 0 ? "bg-gray-100" : "bg-white"
+                    } hover:bg-blue-100`}
+                  >
+                    <td className="py-3 px-4">{task.name}</td>
+                    <td className="py-3 px-4">{task.description}</td>
+                    <td className="py-3 px-4 text-center">
+                      {new Date(task.dueDate).toLocaleDateString()}
+                    </td>
+                    <td
+                      className={`py-3 px-4 text-center font-semibold ${
+                        task.status === "pending" ? "text-red-500" : "text-green-500"
+                      }`}
+                    >
+                      {task.status}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" className="text-center py-4 text-gray-500">
+                    No tasks available
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="text-center mt-8 pb-4 text-gray-300 text-sm">
+        &copy; {new Date().getFullYear()} Task Manager. All rights reserved.
+      </div>
     </div>
-    <div className="bg-white mt-8 m-10 lg:m-6 rounded-4xl border-4 border-blue-400   shadow-2xl   shadow-white">
-   
-<div className="overflow-x-auto rounded-4xl p-2  ">
-<table className="w-full border-collapse rounded-lg shadow-lg bg-white text-gray-900">
-<thead>
-    <tr className="bg-blue-600 text-white uppercase text-sm leading-normal">
-      <th className="py-3 px-6 text-left">Task Name</th>
-      <th className="py-3 px-6 text-left">Description</th>
-      <th className="py-3 px-6 text-center">Due Date</th>
-      <th className="py-3 px-6 text-center">Status</th>
-    </tr>
-  </thead>
-    <tbody>
-        {task.map((task, index) => (
-          <tr key={task.id} className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"} hover:bg-blue-100`}>
-            <td className="py-3 px-6">{task.name}</td>
-            <td className="py-3 px-6">{task.description}</td>
-            <td className="py-3 px-6 text-center">{new Date(task.dueDate).toLocaleDateString()}</td>
-            <td className={`py-3 px-6 text-center ${task.status === "pending" ? "text-red-500" : "text-green-500"}`}>
-              {task.status}
-            </td>
-          </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
+  );
+};
 
-</div></div>
-</div>
-</>
-
-    );
-}
 export default Dashboard;

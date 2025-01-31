@@ -2,9 +2,6 @@
     "functions": {
       "api/TaskRoutes/**/*.js": {
         "maxDuration": 30
-      },
-      "api/**/*.js": {
-        "maxDuration": 30
       }
     },
     "builds": [

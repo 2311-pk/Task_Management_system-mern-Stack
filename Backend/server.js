@@ -11,7 +11,7 @@ const app=express();
 app.use(cors({
     origin: [
       "http://localhost:5173",  // Local frontend
-      // Deployed frontend
+      "https://task-management-system-mern-stack-tej3.vercel.app" // Deployed frontend
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],  // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"],  // Allowed headers

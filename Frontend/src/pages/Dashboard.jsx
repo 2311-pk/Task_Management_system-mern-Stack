@@ -9,11 +9,11 @@ import {
   LinearScale,
   Tooltip,
   Legend,
-} from "chart.js/auto";
+} from "chart.js";
 
 
-// Register required components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+
 
 const Dashboard = () => {
   const data = {

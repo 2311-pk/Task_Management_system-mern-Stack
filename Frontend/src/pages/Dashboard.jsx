@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from "../config";
-import { Bar } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-  Tooltip,
-  Legend,
-} from "chart.js";
 
-
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 
 const Dashboard = () => {
@@ -84,7 +73,6 @@ const Dashboard = () => {
           Task Overview
         </h2>
         <div className="w-full overflow-x-auto">
-          <Bar data={data} />
         </div>
       </div>
 

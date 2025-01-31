@@ -7,9 +7,6 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss()
   ],
-  optimizeDeps: {
-    include: ['react-chartjs-2'],
-  },
   build: {
     rollupOptions: {
       external: ['react-chartjs-2'],

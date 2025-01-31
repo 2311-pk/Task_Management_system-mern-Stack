@@ -1,12 +1,13 @@
 {
-  "build": {
-    "env": {
-      "NODE_ENV": "production"
-    }
-  },
   "functions": {
     "api/*": {
       "maxDuration": 30
     }
-  }
+  },
+  "builds": [
+    {
+      "src": "api/**/*",
+      "use": "@vercel/node"
+    }
+  ]
 }

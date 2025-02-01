@@ -1,6 +1,6 @@
 [build]
-  command = "npm run build"
-  publish = "build"
+  command = "npm run dev"
+  publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "18" # Specify the Node.js version
+  NODE_VERSION = "20.15.1" # Specify the Node.js version

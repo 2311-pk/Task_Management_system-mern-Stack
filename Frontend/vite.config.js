@@ -9,6 +9,8 @@ export default defineConfig({
   ],  resolve: {
     // Ensure node_modules is included
     modules: ['node_modules'],
+    // Ensure Vite resolves .jsx files
+    extensions: ['.js', '.jsx'],
   },
   build: {
     rollupOptions: {

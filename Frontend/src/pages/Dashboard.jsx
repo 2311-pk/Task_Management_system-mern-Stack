@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BASE_URL } from "../config";
-import  Chart  from "./Chart";
+import  Chart  from ".Chart";
 const Dashboard = () => {
   
 
